@@ -1,4 +1,5 @@
 from flask import Flask, abort
+from flask.ext.environments import Environments
 
 import logging
 
@@ -10,6 +11,10 @@ if not has_loaded:
 
     # Setup App
     app = Flask(root_module)
+    env = Environments(app, default_env='DEVELOPMENT')
+    env.from_object('config')
+
+    print "Running in environment: %s" % env.env
     
     # Add custom Error Handlers
     @app.errorhandler(404)
