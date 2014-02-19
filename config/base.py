@@ -9,4 +9,6 @@ class BaseConfig(object):
    HOST = '0.0.0.0'
    PORT = 8000
    ADMINS = frozenset(['webmaster@example.com'])
-
+   INSTALLED_APPS = (
+       '',
+   )
