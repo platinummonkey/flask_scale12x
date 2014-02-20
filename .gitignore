@@ -1,1 +1,8 @@
 *.pyc
+
+# ignore generated scripts
+run_tests.sh
+setup_titan.sh
+start_titan.sh
+stop_titan.sh
+talk_helper.sh

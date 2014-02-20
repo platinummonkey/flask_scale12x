@@ -1,0 +1,320 @@
+\documentclass{beamer}
+\usetheme{Antibes}
+\usecolortheme{seahorse}
+\setbeamertemplate{itemize items}[default]
+
+\title{Django-Style Flask}
+\author[Cody Lee]{Cody Lee\linebreak \texttt{codylee@wellaware.us}\linebreak
+\footnotesize
+git clone \url{https://github.com/platinummonkey/flask\_scale12x.git}}
+\date{SCALE12x
+
+Feb 22, 2014}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\frame{
+\frametitle{Introduction}
+\begin{itemize}
+\item Senior Network Engineer at WellAware - An oil and gas SaaS and network communications company
+\item Conference Chairman for the annual Texas Linux Festival
+\begin{itemize}
+\item Come check us out June 13-14 in Austin, TX!
+\item \url{http://texaslinuxfest.org} for more information
+\end{itemize}
+\item Yes, I'm really a Mechanical Engineer
+\begin{itemize}
+\item Bachelors of Science in Mechanical Engineering at Texas A\&M University
+\item Master's student at University of Texas at San Antonio
+\end{itemize}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Outline}
+\tableofcontents
+}
+
+\section{Get Prepared}
+\begin{frame}[fragile]
+\frametitle{Get Prepared}
+\begin{itemize}
+\item \footnotesize git clone \url{https://github.com/platinummonkey/flask\_scale12x.git}\normalsize
+\item Run the \emph{viewer\_setup.sh} script to setup the helper scripts.
+\item (Optional*) Setup and Start Titan: run \emph{setup\_titan.sh} and \emph{start\_titan.sh}.
+\item (Optional*) Setup virtualenv:
+\begin{verbatim}
+mkvirtualenv -a <repo_root> \
+    -r <repo_root>/requirements.pip \
+    flask_scale12x
+\end{verbatim}
+\item Utilize \emph{talk\_helper.sh} during the talk to switch between commits easily.
+\end{itemize}
+\end{frame}
+
+\section{Flask and Django}
+\subsection{Django}
+\frame{
+\frametitle{Django}
+\begin{itemize}
+\item "Batteries Included"
+\item Early Framework led to early adoption
+\item Monolithic approach
+  \begin{itemize}
+  \item Organization - Everything is an app
+  \item Url importing and view routing
+  \item Models - ORM with DB Managers for use with RDBs
+  \item Admin
+  \item Builtins
+    \begin{itemize}
+    \item Auth \& Permissions
+    \item Testing
+    \item Configuration
+    \end{itemize}
+  \end{itemize}
+\item Documentation
+\item Templating
+\item Extensions
+\item Django-NoSQL project - for use with NoSQL DBs [however its just an adapter]
+\end{itemize}
+}
+
+\subsection{Flask}
+\frame{
+\frametitle{Flask}
+\begin{itemize}
+\item Flexible by Design
+\item No forced organization pattern
+\item URL routing happens at the View Definition
+\item Documentation
+  \begin{itemize}
+  \item Great but could be better
+  \item Version docs are not separated, but noted explicitly within the \emph{latest} docs.
+  \end{itemize}
+\item Templating
+  \begin{itemize}
+  \item Request object is implicitly context aware
+  \item Jinja2
+    \begin{itemize}
+    \item Done right - Doesn't unecessarily limit programmer
+    \item Run python code and use callables
+    \end{itemize}
+  \end{itemize}
+\item Extensions
+  \begin{itemize}
+  \item Auth - Flask-Login
+  \item Permissions - Flask-Principal (if simple enough)
+  \item Configuration - Flask-Environment
+  \item Testing - Flask-Testing
+  \end{itemize}
+\end{itemize}
+}
+
+
+\subsection{Side-By-Side}
+\begin{frame}
+\frametitle{Flask and Django Side-by-Side}
+\begin{columns}
+  \begin{column}[T]{5cm}
+  Django
+  
+  \begin{itemize}
+    \item "Batteries Included"
+    \item Forced Organization Pattern
+    \item Monolithic approach
+    \item Url importing and view routing
+    \item ORM
+    \item Many Builtins
+    \item Great Documentation
+    \item Okay Templating
+    \item Extensions available
+  \end{itemize}
+  \end{column}
+  
+  \begin{column}[T]{5cm}
+  Flask
+  
+  \begin{itemize}
+    \item No Batteries
+    \item No forced organization pattern
+    \item Modular approach
+    \item URL routing happens at the View Definition
+    \item No ORM forced
+    \item Minimal Builtins
+    \item Good Documentation
+    \item Better Templating
+    \item Extensions usually required
+    \end{itemize}  
+  \end{column}
+\end{columns}
+\end{frame}
+
+\section{Django Sugar}
+\subsection{What We Care About}
+\frame{
+\frametitle{Django Sugar}
+What was really nice to have?
+
+\begin{itemize}
+\item Organization
+\item Global Application Context
+\item Configuration
+\item URL and View Routing
+\item ORM \& Models
+\item Auth \& Sessions
+\item Testing
+\item Permissions
+\end{itemize}
+}
+
+\subsection{Sugar Cube}
+\begin{frame}
+\frametitle{Organization}
+\begin{block}{This where you get to decide how everything gets laid out!}
+Let's just go with Django's "everything is an app" approach for this context. Feel free to do anything sensible (or not).
+\end{block}
+\tiny
+\emph{\textless project\_root\textgreater}
+\begin{itemize}
+\item app.py, models.py, requirements.pip, server.py, shell.py, urls.py, version.py, views.py
+\item auth
+  \begin{itemize}
+  \tiny
+  \item \_\_init\_\_.py, decorators.py, models.py, urls.py, views.py
+  \item permissions
+    \begin{itemize}
+    \tiny
+    \item \_\_init\_\_.py, decorators.py, permissions.py
+    \end{itemize}
+  \item tests...
+  \end{itemize}
+  \tiny
+\item config
+  \begin{itemize}
+  \tiny
+  \item \_\_init\_\_.py, base.py, development.py, production.py, staging.py
+  \end{itemize}
+\item tools
+  \begin{itemize}
+  \tiny
+  \item apps.py, constants.py, login\_manager.py, url\_tools.py, sessions.py, ...
+  \end{itemize}
+\end{itemize}
+\normalsize
+\end{frame}
+
+
+\frame{
+\frametitle{Global Application Context}
+\begin{itemize}
+\item The main \emph{app.py}!
+\item Pretty common method, with a very slight twist
+\item TO THE CODE! \linebreak \emph{683e32dd75361d4f87687b4f2235de8af455b950}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Configuration}
+\begin{itemize}
+\item Flask-Environments
+\item Utilize FLASK\_ENVIRONMENT environment variable
+\item TO THE CODE! \linebreak \emph{028b31d21435954cb2579a6e780d579f6d599c00}
+\end{itemize}
+}
+
+\frame{
+\frametitle{URL and View Routing}
+\begin{itemize}
+\item Here is where things get sugary.
+\item How does Django do it? How do we want it?
+  \begin{itemize}
+  \item \emph{INSTALLED\_APPS}
+  \item tooling
+  \end{itemize}
+\item TO THE CODE! \linebreak \emph{ba95b15727bd4f543e907e4e12d06112d750168f}
+\end{itemize}
+}
+
+\frame{
+\frametitle{ORM \& Models}
+\begin{itemize}
+\item Pick a Database (SQL, NoSQL, Graph, Key-Value, ...)
+\item Hope that it has a sane ORM, if not...
+\item CREATE ONE! (challengeaccepted)
+\item We'll use bulbs (a really cool OGM) and factory\_boy
+\item How do we want to integrate it! Just the same way! Utilize INSTALLED\_APPS loader
+\item TO THE CODE! \linebreak
+\emph{a3ca56d346731b9ca953f0c08fda3fb99325d353}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Auth \& Sessions}
+\begin{itemize}
+\item Auth and sessions are built-in to Django, not so much in Flask
+\item Create or own \emph{auth app} and models
+\item Implement Authentication with Flask-Login and Flask-Cache!
+\item TO THE CODE! \linebreak
+\emph{66c2c5b14e52584892d1a28a9dd33f112d57591c}
+\end{itemize}
+}
+
+
+\frame{
+\frametitle{Testing}
+\begin{itemize}
+\item Django has a TestRunner built-in - creates test database and... Flask doesn't
+\item We still have nose!
+\item We also have Flask-Testing!
+\item TO THE CODE! \linebreak
+\emph{66c2c5b14e52584892d1a28a9dd33f112d57591c}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Permissions}
+\begin{itemize}
+\item Permisisons are built-in to Django (Though Guardian is way better)
+\item Create our own or use Flask-Prinicpal
+\item Preview available in code \linebreak
+\emph{66c2c5b14e52584892d1a28a9dd33f112d57591c}
+\end{itemize}
+}
+
+\section{Wrap it All Up}
+\frame{
+\frametitle{Wrapping it All Up}
+\begin{itemize}
+\item Whoa! This looks and feels \emph{sorta} like Django!
+\item What we've done today:
+  \begin{itemize}
+  \item Organization
+  \item Global Application Context
+  \item Configuration
+  \item URL and View Routing
+  \item ORM \& Models
+  \item Auth \& Sessions
+  \item Testing
+  \item Permissions
+  \end{itemize}
+\end{itemize}
+}
+
+\section{Questions}
+\frame{
+\begin{center}
+Questions?
+
+Comments?
+\linebreak
+\linebreak
+\linebreak
+\emph{Please just wake up.}
+\end{center}
+}
+
+\end{document}
