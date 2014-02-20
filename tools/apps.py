@@ -1,4 +1,5 @@
 from werkzeug.utils import import_string, ImportStringError
+from bulbs_wrapper import configure_models, configure_module_groovy_scripts
 import logging
 from app import app
 
@@ -35,9 +36,13 @@ def installed_apps_loader(flask_app, installed_apps):
         url_module = new_app
         while not url_module.endswith(".urls.urls"):
             url_module += '.urls'
+        models_module = new_app + '.models'
 
         # fix relative import as well
         url_module = url_module.lstrip('.')
+        models_module = models_module.lstrip('.')
+        module_groovy_scripts = (new_app + '.GROOVY_SCRIPTS').lstrip('.')
+        
 
         ## Setup URLS
         # don't assume we have a urls.py, it may just be a collection of models
@@ -47,5 +52,28 @@ def installed_apps_loader(flask_app, installed_apps):
         except (ImportError, ImportStringError):
             logger.info("No urls.py found for app %s, abandoning import" % new_app)
 
+        ## install groovy scripts for the app
+        try:
+            groovy_scripts = import_string(module_groovy_scripts)
+            assert isinstance(groovy_scripts, (tuple, list)), "GROOVY_SCRIPTS for %s must be a tuple!" % new_app
+            configure_module_groovy_scripts(app, new_app, groovy_scripts)
+        except (ImportError, ImportStringError):
+            logger.info("No GROOVY_SCRIPTS found for app %s" % new_app)
+
+        ## setup OGM classes for our graph context
+        # don't assume we have a models.py, it may just be a collection of views
+        try:
+            logger.debug("trying to import models module: %s" % models_module)
+            print "trying to import models module: %s => " % models_module,
+            module = import_string(models_module)
+            #print "loaded models.py, trying to load models",
+            loaded_models = configure_models(app, module)
+            #print "loaded models: %s" % (loaded_models),
+            #app_models['__APP_MODELS'][new_app] = loaded_models
+            app.config['__APP_MODELS'][new_app] = loaded_models
+            print "successfully imported models"
+        except (ImportError, ImportStringError, TypeError):
+            logger.info("No models.py found for app %s, abandoning import" % new_app)
+            print "No models.py found for app %s, abandoning import" % new_app
 
 __all__ = ['installed_apps_loader']

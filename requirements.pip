@@ -1,7 +1,18 @@
 Flask==0.10.1
+Flask-Environments==0.1
 Jinja2==2.7.2
 MarkupSafe==0.18
+PyYAML==3.10
 Werkzeug==0.9.4
 argparse==1.2.1
+## FIXME: could not find svn URL in dependency_links for this package:
+bulbs==0.3.28-20140127
+distribute==0.7.3
+factory-boy==2.3.1
+httplib2==0.8
 itsdangerous==0.23
+omnijson==0.1.2
+python-dateutil==1.5
+pytz==2013.9
+six==1.5.2
 wsgiref==0.1.2
