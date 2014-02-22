@@ -18,6 +18,13 @@ Feb 22, 2014}
 \end{frame}
 
 \frame{
+\begin{center}
+\includegraphics[width=5cm]{images/FairWarning.jpg}
+\includegraphics[width=5cm]{images/picard_do_it_live.jpg}
+\end{center}
+}
+
+\frame{
 \frametitle{Introduction}
 \begin{itemize}
 \item Senior Network Engineer at WellAware - An oil and gas SaaS and network communications company
@@ -36,7 +43,14 @@ Feb 22, 2014}
 
 \frame{
 \frametitle{Outline}
+\begin{columns}
+\begin{column}{5cm}
 \tableofcontents
+\end{column}
+\begin{column}{4cm}
+\includegraphics[width=5cm]{images/fireworks.jpg}
+\end{column}
+\end{columns}
 }
 
 \section{Get Prepared}
@@ -61,8 +75,22 @@ mkvirtualenv -a <repo_root> \
 \frame{
 \frametitle{Django}
 \begin{itemize}
-\item "Batteries Included"
-\item Early Framework led to early adoption
+\item "Batteries Included" \linebreak
+\begin{center}
+\includegraphics[width=2cm]{images/batteries_included.jpg}
+\end{center}
+\item Early Framework led to early adoption \linebreak
+\begin{center}
+\includegraphics[width=4cm]{images/baby-surprise.jpg}
+\end{center}
+\end{itemize}
+}
+
+\frame{
+\frametitle{Django}
+\begin{columns}
+\column{1.0\textwidth}
+\begin{itemize}
 \item Monolithic approach
   \begin{itemize}
   \item Organization - Everything is an app
@@ -76,11 +104,30 @@ mkvirtualenv -a <repo_root> \
     \item Configuration
     \end{itemize}
   \end{itemize}
+\end{itemize}
+\column{0.1\textwidth}
+\hspace*{-1.5cm}
+\includegraphics[width=3.5cm]{images/red-queen.jpg}
+\end{columns}
+}
+
+\frame{
+\frametitle{Django}
+\begin{columns}[T]
+\column{0.99\textwidth}
+\begin{itemize}
 \item Documentation
 \item Templating
 \item Extensions
-\item Django-NoSQL project - for use with NoSQL DBs [however its just an adapter]
+\item Django-NoSQL project
+  \begin{itemize}
+  \item For use with NoSQL DBs [however its just an adapter]
+  \end{itemize}
 \end{itemize}
+\column{0.01\textwidth}
+\hspace*{-2.5cm}
+\includegraphics[width=3cm]{images/document_all_things.jpg}
+\end{columns}
 }
 
 \subsection{Flask}
@@ -88,12 +135,27 @@ mkvirtualenv -a <repo_root> \
 \frametitle{Flask}
 \begin{itemize}
 \item Flexible by Design
+\begin{center}
+\includegraphics[width=3cm]{images/flexible.png}
+\end{center}
 \item No forced organization pattern
+\begin{center}
+\includegraphics[width=3cm]{images/guy-fawkes.jpg}
+\end{center}
 \item URL routing happens at the View Definition
+\end{itemize}
+}
+
+\frame{
+\frametitle{Flask}
+\begin{columns}[T]
+\column{0.99\textwidth}
+\begin{itemize}
 \item Documentation
   \begin{itemize}
   \item Great but could be better
-  \item Version docs are not separated, but noted explicitly within the \emph{latest} docs.
+  \item Version docs are not separated
+  \item Changes noted explicitly within the \emph{latest} docs.
   \end{itemize}
 \item Templating
   \begin{itemize}
@@ -104,6 +166,22 @@ mkvirtualenv -a <repo_root> \
     \item Run python code and use callables
     \end{itemize}
   \end{itemize}
+\end{itemize}
+\column{0.01\textwidth}
+\hspace*{-2.5cm}
+\includegraphics[width=3cm]{images/scattered_docs.jpg} 
+\column{0.01\textwidth}
+\vspace*{2cm}
+\hspace*{-2cm}
+\includegraphics[width=2cm]{images/jinja-small.png}
+\end{columns}
+}
+
+\frame{
+\frametitle{Flask}
+\begin{columns}
+\column{0.99\textwidth}
+\begin{itemize}
 \item Extensions
   \begin{itemize}
   \item Auth - Flask-Login
@@ -112,6 +190,10 @@ mkvirtualenv -a <repo_root> \
   \item Testing - Flask-Testing
   \end{itemize}
 \end{itemize}
+\column{0.01\textwidth}
+\hspace*{-2cm}
+\includegraphics[width=2cm]{images/puzzle.png}
+\end{columns}
 }
 
 
@@ -157,6 +239,8 @@ mkvirtualenv -a <repo_root> \
 \subsection{What We Care About}
 \frame{
 \frametitle{Django Sugar}
+\begin{columns}
+\begin{column}{8cm}
 What was really nice to have?
 
 \begin{itemize}
@@ -169,6 +253,12 @@ What was really nice to have?
 \item Testing
 \item Permissions
 \end{itemize}
+\end{column}
+
+\begin{column}{3cm}
+\includegraphics[width=3cm]{images/sugar_cubes.jpg}
+\end{column}
+\end{columns}
 }
 
 \subsection{Sugar Cube}
@@ -212,6 +302,10 @@ Let's just go with Django's "everything is an app" approach for this context. Fe
 \frametitle{Global Application Context}
 \begin{itemize}
 \item The main \emph{app.py}!
+\linebreak
+\begin{center}
+\includegraphics[width=2cm]{images/earth.png}
+\end{center}
 \item Pretty common method, with a very slight twist
 \item TO THE CODE! \linebreak \emph{683e32dd75361d4f87687b4f2235de8af455b950}
 \end{itemize}
@@ -224,6 +318,9 @@ Let's just go with Django's "everything is an app" approach for this context. Fe
 \item Utilize FLASK\_ENVIRONMENT environment variable
 \item TO THE CODE! \linebreak \emph{028b31d21435954cb2579a6e780d579f6d599c00}
 \end{itemize}
+\begin{center}
+\includegraphics[width=3cm]{images/wrench.png}
+\end{center}
 }
 
 \frame{
@@ -237,19 +334,28 @@ Let's just go with Django's "everything is an app" approach for this context. Fe
   \end{itemize}
 \item TO THE CODE! \linebreak \emph{ba95b15727bd4f543e907e4e12d06112d750168f}
 \end{itemize}
+\begin{center}
+\includegraphics[width=3cm]{images/ermahgerd-aliens.jpg}
+\end{center}
 }
 
 \frame{
 \frametitle{ORM \& Models}
+\begin{columns}[T]
+\column{1.05\textwidth}
 \begin{itemize}
 \item Pick a Database (SQL, NoSQL, Graph, Key-Value, ...)
 \item Hope that it has a sane ORM, if not...
-\item CREATE ONE! (challengeaccepted)
+\item CREATE ONE!
 \item We'll use bulbs (a really cool OGM) and factory\_boy
 \item How do we want to integrate it! Just the same way! Utilize INSTALLED\_APPS loader
 \item TO THE CODE! \linebreak
 \emph{a3ca56d346731b9ca953f0c08fda3fb99325d353}
 \end{itemize}
+\column{0.01\textwidth}
+\hspace*{-2cm}
+\includegraphics[width=2cm]{images/challenge_accepted.png}
+\end{columns}
 }
 
 \frame{
@@ -261,6 +367,9 @@ Let's just go with Django's "everything is an app" approach for this context. Fe
 \item TO THE CODE! \linebreak
 \emph{66c2c5b14e52584892d1a28a9dd33f112d57591c}
 \end{itemize}
+\begin{center}
+\includegraphics[width=3cm]{images/authentication.jpg}
+\end{center}
 }
 
 
@@ -273,6 +382,9 @@ Let's just go with Django's "everything is an app" approach for this context. Fe
 \item TO THE CODE! \linebreak
 \emph{66c2c5b14e52584892d1a28a9dd33f112d57591c}
 \end{itemize}
+\begin{center}
+\includegraphics[width=5cm]{images/unit-testing.png}
+\end{center}
 }
 
 \frame{
@@ -283,11 +395,16 @@ Let's just go with Django's "everything is an app" approach for this context. Fe
 \item Preview available in code \linebreak
 \emph{66c2c5b14e52584892d1a28a9dd33f112d57591c}
 \end{itemize}
+\begin{center}
+\includegraphics[width=4cm]{images/grumpy_cat.png}
+\end{center}
 }
 
 \section{Wrap it All Up}
 \frame{
 \frametitle{Wrapping it All Up}
+\begin{columns}
+\column{0.99\textwidth}
 \begin{itemize}
 \item Whoa! This looks and feels \emph{sorta} like Django!
 \item What we've done today:
@@ -302,6 +419,20 @@ Let's just go with Django's "everything is an app" approach for this context. Fe
   \item Permissions
   \end{itemize}
 \end{itemize}
+\column{0.01\textwidth}
+\hspace*{-2cm}
+\includegraphics[width=2cm]{images/mummy.png}
+\end{columns}
+}
+
+\frame{
+\frametitle{So am I using this?}
+\begin{center}
+No. \linebreak
+We're moving off of Django to Falcon. \linebreak \url{http://falconframework.org/}
+\linebreak
+\includegraphics[width=4cm]{images/falcon_logo.png}
+\end{center}
 }
 
 \section{Questions}
